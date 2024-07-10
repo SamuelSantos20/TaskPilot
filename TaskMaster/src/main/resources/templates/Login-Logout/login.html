@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Project Management App</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Login</h1>
+    </header>
+    <main>
+        <form th:action="@{/logar}" th:object="${Usuarios}" method="post">
+            <div th:if="${error}">
+                <p th:text="${error}" style="color:red;"></p>
+            </div>
+            <div th:if="${message}">
+                <p th:text="${message}" style="color:green;"></p>
+            </div>
+            <label for="username">E-mail:</label>
+            <input type="text" id="username" th:field="*{email}" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" th:field="*{senha}" required>lo
+            <button type="submit">Login</button>
+        </form>
+        <p>Don't have an account? <a th:href="@{registrar}">Register here</a>.</p>
+    </main>
+</body>
+</html>

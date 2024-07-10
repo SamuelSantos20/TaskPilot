@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task - Project Management App</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <style>
+        /* Estilos CSS adicionais para melhorar a visualização */
+        .comment-section {
+            margin-top: 20px;
+        }
+        .comment {
+            border: 1px solid #ccc;
+            padding: 10px; /* Manter o padding original */
+            margin-bottom: 10px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            position: relative;
+        }
+        .comment-author {
+            font-weight: bold;
+        }
+        .comment-content {
+            margin-top: 5px;
+        }
+        .comment-form {
+            margin-top: 20px;
+        }
+        .delete-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        .delete-button:hover {
+            background-color: #ff1a1a;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Task Name</h1>
+        <nav>
+            <a th:href="@{/}">Home</a>
+            <a th:href="@{painel}">Dashboard</a>
+            <a th:href="@{Perfil}">Profile</a>
+            <a th:href="@{/logout}">Logout</a>
+        </nav>
+    </header>
+    <main>
+        <section th:each="t: ${tarefas}" th:object="${t}">
+            <h2>Task Details</h2>
+            <p>Description of the task: <span th:text="*{descricao}"></span></p>
+            <p>Status: <span th:text="*{status}"></span></p>
+
+            <div class="comment-section">
+                <h3>Comments</h3>
+                <ul>
+                    <li th:each="c : ${lista_comentarios}" class="comment">
+                        <p class="comment-author" th:text="${c.autor}"></p>
+                        <p class="comment-content" th:text="${c.conteudo}"></p>
+                        <form th:action="@{/delete_comment/{comentario_id}(comentario_id=${c.id})}" method="post">
+                            <button type="submit" class="delete-button">Delete</button>
+                        </form>
+                    </li>
+                </ul>
+
+                <div class="comment-form">
+                    <h4>Add a comment:</h4>
+                    <form th:action="@{/add_comment/{tarefa_id}(tarefa_id=${t.id})}" th:object="${comentario}" method="post">
+                        <label for="comment">Comment:</label>
+                        <textarea id="comment" name="conteudo" th:field="*{conteudo}" required></textarea>
+                        <button type="submit">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

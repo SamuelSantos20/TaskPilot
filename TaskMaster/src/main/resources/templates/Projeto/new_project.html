@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Create New Project - Project Management App</title>
+	<link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+	<header>
+		<h1>Create New Project</h1>
+		<nav>
+			<a th:href="@{/}">Home</a>
+			<a th:href="@{painel}">Dashboard</a>
+			<a th:href="@{Perfil}">Profile</a>
+			<a th:href="@{/logout}">Logout</a>
+		</nav>
+	</header>
+	<main>
+		<form th:action="@{/create_project}" th:object="${projeto}" method="post">
+			<div th:if="${error}">
+				<p th:text="${error}" style="color:red;"></p>
+			</div>
+
+			<div th:if="${message}">
+				<p th:text="${message}" style="color:green;"></p>
+			</div>
+			<label for="projectName">Project Name:</label>
+			<input type="text" id="projectName" th:field="*{nome}" required>
+
+			<label for="description">Description:</label>
+			<textarea id="description" th:field="*{descricao}" required></textarea>
+
+			<button type="submit">Create Project</button>
+		</form>
+	</main>
+</body>
+
+</html>

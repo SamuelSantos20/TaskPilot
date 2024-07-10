@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Dashboard - Project Management App</title>
+	<link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+	<header>
+		<h1>Dashboard</h1>
+		<nav>
+			<a th:href="@{/}">Home</a>
+			<a th:href="@{painel}">Dashboard</a>
+			<a th:href="@{Perfil}">Profile</a>
+			<a th:href="@{/logout}">Logout</a>
+		</nav>
+	</header>
+	<main>
+		<section>
+			<h2>Your Projects</h2>
+			<ul>
+				<li th:each="p:${projetos} ">
+
+					<a th:href="@{/Listar_tarefas_projeto/{id_projeto} (id_projeto = ${p.id})}" th:text="${p.nome}"></a>
+
+
+				</li>
+
+
+
+			</ul>
+			<a th:href="@{criar_projeto}"><button type="submit">New Project</button></a>
+		</section>
+	</main>
+</body>
+
+</html>
