@@ -44,6 +44,7 @@ Contato
 Para dúvidas ou mais informações, entre em contato:
 
 Email: samuelfamilia377@gmail.com
+
 GitHub: SamuelSantos20
 
 Obrigado por conferir o meu projeto de gerenciamento de tarefas e projetos!
